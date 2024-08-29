@@ -103,6 +103,16 @@ apiRouter.post('/account', (req, res) => {
         };
     };
 
+    for (const account of accounts) {
+        if (account.nameSurname === nameSurname) {
+            const data = {
+                state: 'error',
+                message: `Saskaita tokiu vardu ir pavarde '${nameSurname}' jau yra uzregistruota.`,
+            };
+            return res.json(data);
+        };
+    };
+
     if (dob > minDate) {
         const data = {
             state: 'error',
