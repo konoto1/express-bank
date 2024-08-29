@@ -13,8 +13,6 @@ apiRouter.get('/', (req, res) => {
     return res.json(data.message);
 });
 
-
-
 apiRouter.post('/account', (req, res) => {
 
     if (Object.keys(req.body)[0] !== 'nameSurname' || Object.keys(req.body)[1] !== 'DOB') {
@@ -42,8 +40,6 @@ apiRouter.post('/account', (req, res) => {
     const month = ('' + (date.getMonth() + 1)).padStart(2, 0);
     const day = ('' + (date.getDate())).padStart(2, 0);
     const minDate = parseInt(`${year - 18}${month}${day}`);
-
-
 
     if (name.slice(1) !== name.slice(1).toLowerCase() || surname.slice(1) !== surname.slice(1).toLowerCase()) {
         const data = {
@@ -127,7 +123,6 @@ apiRouter.post('/account', (req, res) => {
     };
 
     accounts.push({ ...req.body, "money": "0" });
-    // console.log(accounts);
 
     return res.json(data);
 
@@ -136,16 +131,21 @@ apiRouter.post('/account', (req, res) => {
 apiRouter.get('/account/:nameSurname', (req, res) => {
     const { nameSurname } = req.params;
     const inputName = nameSurname.split('-')[0].toLowerCase();
+    const validInputName = inputName[0].toUpperCase() + inputName.slice(1);
     const inputSurname = nameSurname.split('-')[1].toLowerCase();
-    const inputNameSurname = nameSurname.toLowerCase();
+    const validInputSurname = inputSurname[0].toUpperCase() + inputSurname.slice(1);
+
     if (accounts.length === 0) {
-        return res.json(`Saskaitu sarasas tuscias.`);
-    }
+        return res.send('Saskaitu sarasas yra tuscias.');
+    };
 
-    // console.log(accounts.map((item, index) => item.nameSurname));
-    // console.log(inputNameSurname);
+    let i = 0;
+    for (const account of accounts) {
+        if (`${validInputName}-${validInputSurname}` === account.nameSurname) {
+            return res.send(`Saskaitos savininko vardas: ${validInputName}, pavarde: ${validInputSurname}, gimimo data: ${account.DOB}.`);
+        };
+        i++;
+    };
 
-
-
-    return res.send([inputName, inputSurname]);
+    return res.send(`Saskaita tokiu vardu ir pavarde: ${validInputName} ${validInputSurname} nerasta.`);
 });
