@@ -139,12 +139,10 @@ apiRouter.get('/account/:nameSurname', (req, res) => {
         return res.send('Saskaitu sarasas yra tuscias.');
     };
 
-    let i = 0;
     for (const account of accounts) {
         if (`${validInputName}-${validInputSurname}` === account.nameSurname) {
             return res.send(`Saskaitos savininko vardas: ${validInputName}, pavarde: ${validInputSurname}, gimimo data: ${account.DOB}.`);
         };
-        i++;
     };
 
     return res.send(`Saskaita tokiu vardu ir pavarde: ${validInputName} ${validInputSurname} nerasta.`);
