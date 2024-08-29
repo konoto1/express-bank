@@ -3,7 +3,7 @@ import { accounts } from "../data/accounts.js";
 
 export const apiRouter = express.Router();
 
-const validSymblos = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+const validSymblos = 'qwertyuiopasdfghjklzxcvbnm-QWERTYUIOPASDFGHJKLZXCVBNM';
 
 apiRouter.get('/', (req, res) => {
     const data = {
@@ -43,10 +43,12 @@ apiRouter.post('/account', (req, res) => {
     const day = ('' + (date.getDate())).padStart(2, 0);
     const minDate = parseInt(`${year - 18}${month}${day}`);
 
-    if (nameSurname.startsWith('-') || nameSurname.endsWith('-')) {
+
+
+    if (name.slice(1) !== name.slice(1).toLowerCase() || surname.slice(1) !== surname.slice(1).toLowerCase()) {
         const data = {
             state: 'error',
-            message: 'Vardas ir pavarde negali prasideti ar baigtis `-` simboliu.',
+            message: 'Tik pirmosios vardo ir pavardes raides gali buti didziosios',
         };
         return res.json(data);
     };
@@ -55,14 +57,6 @@ apiRouter.post('/account', (req, res) => {
         const data = {
             state: 'error',
             message: 'Vardo ir pavarde turi but atskirti `-` simboliu.',
-        };
-        return res.json(data);
-    };
-
-    if (nameSurname.trim() !== nameSurname) {
-        const data = {
-            state: 'error',
-            message: 'Vardo ir pavardes ivestyje negali buti tusciu tarpu',
         };
         return res.json(data);
     };
@@ -99,7 +93,7 @@ apiRouter.post('/account', (req, res) => {
             return res.json(data);
         };
 
-        if (!validSymblos.includes(symbol) && symbol !== '-') {
+        if (!validSymblos.includes(symbol)) {
             const data = {
                 state: 'error',
                 message: `Vardo ir pavardes ivestis turi neleistinu simboliu. Lesitini simboliai: (${validSymblos}) `,
@@ -123,7 +117,7 @@ apiRouter.post('/account', (req, res) => {
     };
 
     accounts.push({ ...req.body, "money": "0" });
-    console.log(accounts);
+    // console.log(accounts);
 
     return res.json(data);
 
