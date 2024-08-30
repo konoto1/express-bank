@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
-    return res.send('Bank');
+    return res.send('Sveiki atvyke i banka.');
 });
 
 app.get('*', (req, res) => {
