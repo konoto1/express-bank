@@ -201,3 +201,33 @@ Data type to be used:
 {
 "DOB": "YYYY-MM-DD"
 }
+
+### /api/withdrawal
+
+> POST
+
+Withdraws money from account.
+
+Data to be used:
+
+{
+"nameSurname": "name-surname",
+"amount": "1236"
+}
+
+Amount to be entered in cents.
+
+### /api/deposit
+
+> POST
+
+Deposits money into account.
+
+Data to be used:
+
+{
+"nameSurname": "name-surname",
+"amount": "1236"
+}
+
+Amount to be entered in cents.
