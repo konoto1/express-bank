@@ -1,6 +1,7 @@
 import express from "express";
 import { apiRouter } from "./router/apiRouter.js";
 import { apiAccountRouter } from "./router/apiAccountRouter.js";
+import { apiMoneytRouter } from "./router/apiMoneyRouter.js";
 
 const app = express();
 const port = 5025;
@@ -14,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter);
 
 app.use('/api/account/:nameSurname', apiAccountRouter);
+
+app.use('/api', apiMoneytRouter);
 
 app.get('/', (req, res) => {
     return res.send('Sveiki atvyke i banka.');
