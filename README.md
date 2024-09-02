@@ -37,6 +37,12 @@ Git - _download and install_
 https://git-scm.com
 ```
 
+Insomnia - download and install
+
+```
+https://insomnia.rest/download
+```
+
 ### 🏃 Run locally
 
 Would like to run this project locally? Open terminal and follow these steps:
