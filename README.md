@@ -230,4 +230,18 @@ Data to be used:
 "amount": "1236"
 }
 
+### /api/transfer
+
+> POST
+
+Transfers money between accounts
+
+Data to be used:
+
+{
+"fromNameSurname": "name-surname",
+"toNameSurname": "name-surname",
+"amount": "1236"
+}
+
 Amount to be entered in cents.
